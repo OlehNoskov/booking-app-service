@@ -4,13 +4,17 @@ import com.booking.service.controller.dto.CityDto;
 import com.booking.service.mapper.CityMapper;
 import com.booking.service.persistence.repository.CityRepository;
 import com.booking.service.service.CityService;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.booking.service.ErrorMessages.CITY_NOT_FOUND_BY_ID;
+
 @Service
 @AllArgsConstructor
+@Transactional
 public class CityServiceImpl implements CityService {
     private final CityRepository cityRepository;
     private final CityMapper cityMapper;
@@ -23,7 +27,10 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public CityDto getCityDtoById(Long id) {
-        return cityRepository.findById(id).map(cityMapper::toCityDto).orElse(null);
+        return cityRepository
+                .findById(id)
+                .map(cityMapper::toCityDto)
+                .orElseThrow(() -> new RuntimeException(String.format(CITY_NOT_FOUND_BY_ID, id)));
     }
 
     @Override

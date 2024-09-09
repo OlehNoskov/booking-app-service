@@ -30,7 +30,7 @@ public class HotelController {
     }
 
     @GetMapping("/{name}")
-    public HotelDto getByName(@PathVariable String name) {
+    public List<HotelDto> getByName(@PathVariable String name) {
         return hotelService.getHotelDtoByName(name);
     }
 

@@ -9,7 +9,7 @@ public interface HotelService {
 
     HotelDto getHotelDtoById(Long id);
 
-    HotelDto getHotelDtoByName(String name);
+    List<HotelDto> getHotelDtoByName(String name);
 
     void deleteById(Long id);
 

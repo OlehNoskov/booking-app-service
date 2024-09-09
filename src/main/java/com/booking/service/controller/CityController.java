@@ -29,7 +29,7 @@ public class CityController {
         return cityService.getCityDtoById(id);
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/name/{name}")
     public CityDto getByName(@PathVariable String name) {
         return cityService.getCityDtoByName(name);
     }
